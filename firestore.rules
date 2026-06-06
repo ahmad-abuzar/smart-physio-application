@@ -1,0 +1,68 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function signedIn() {
+      return request.auth != null;
+    }
+
+    function isOwner(userId) {
+      return signedIn() && request.auth.uid == userId;
+    }
+
+    function validGender(value) {
+      return value in ['male', 'female', 'other'];
+    }
+
+    function validUserProfile() {
+      return request.resource.data.keys().hasAll([
+        'uid',
+        '_id',
+        'name',
+        'email',
+        'emailVerified',
+        'age',
+        'gender',
+        'activityLevel',
+        'healthConditions',
+        'updatedAt'
+      ])
+      && request.resource.data.uid == request.auth.uid
+      && request.resource.data._id == request.auth.uid
+      && request.resource.data.name is string
+      && request.resource.data.name.size() > 0
+      && request.resource.data.email is string
+      && request.resource.data.age is int
+      && request.resource.data.age >= 0
+      && request.resource.data.age <= 120
+      && request.resource.data.gender is string
+      && validGender(request.resource.data.gender)
+      && request.resource.data.activityLevel is string
+      && request.resource.data.healthConditions is list;
+    }
+
+    match /users/{userId} {
+      allow create: if isOwner(userId)
+        && validUserProfile()
+        && request.resource.data.keys().hasAll(['createdAt']);
+
+      allow read: if isOwner(userId);
+
+      allow update: if isOwner(userId)
+        && validUserProfile()
+        && request.resource.data.uid == resource.data.uid
+        && request.resource.data._id == resource.data._id
+        && request.resource.data.email == resource.data.email;
+
+      allow delete: if false;
+    }
+
+    match /users/{userId}/assessments/{assessmentId} {
+      allow read, write: if isOwner(userId);
+    }
+
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

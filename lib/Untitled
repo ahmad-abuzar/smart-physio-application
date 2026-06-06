@@ -1,0 +1,96 @@
+Launching lib/main.dart on Infinix X6811 in debug mode...
+Running Gradle task 'assembleDebug'...
+Note: /Users/apple/.pub-cache/hosted/pub.dev/google_mlkit_pose_detection-0.12.1/android/src/main/java/com/google_mlkit_pose_detection/PoseDetector.java uses unchecked or unsafe operations.
+Note: Recompile with -Xlint:unchecked for details.
+✓ Built build/app/outputs/flutter-apk/app-debug.apk
+Installing build/app/outputs/flutter-apk/app-debug.apk...
+D/FlutterJNI(12883): Beginning load of flutter...
+D/FlutterJNI(12883): flutter (null) was loaded normally!
+I/flutter (12883): [IMPORTANT:flutter/shell/platform/android/android_context_gl_impeller.cc(104)] Using the Impeller rendering backend (OpenGLES).
+D/FlutterRenderer(12883): Width is zero. 0,0
+D/FlutterRenderer(12883): Width is zero. 0,0
+D/FlutterRenderer(12883): Width is zero. 0,0
+D/FlutterJNI(12883): Sending viewport metrics to the engine.
+Debug service listening on ws://127.0.0.1:63264/YFXEXj5vIbY=/ws
+Syncing files to device Infinix X6811...
+I/Choreographer(12883): Skipped 182 frames!  The application may be doing too much work on its main thread.
+I/GED     (12883): ged_boost_gpu_freq, level 100, eOrigin 2, final_idx 42, oppidx_max 42, oppidx_min 0
+D/ActivityThread(12883): -- comp:com.smartphysio.smart_physio/com.smartphysio.smart_physio.MainActivity
+W/TextToSpeech(12883): stop failed: not bound to TTS engine
+I/GED     (12883): ged_boost_gpu_freq, level 100, eOrigin 2, final_idx 42, oppidx_max 42, oppidx_min 0
+I/chatty  (12883): uid=10587(com.smartphysio.smart_physio) identical 1 line
+I/GED     (12883): ged_boost_gpu_freq, level 100, eOrigin 2, final_idx 42, oppidx_max 42, oppidx_min 0
+D/libMEOW (12883): applied 1 plugins for [com.smartphysio.smart_physio]:
+D/libMEOW (12883):   plugin 1: [libMEOW_gift.so]:
+D/ActivityThread(12883): ++ activityComponent:com.smartphysio.smart_physio/com.smartphysio.smart_physio.MainActivity counts:1
+D/libMEOW (12883): applied 1 plugins for [com.smartphysio.smart_physio]:
+D/libMEOW (12883):   plugin 1: [libMEOW_gift.so]:
+I/GED     (12883): [GT]_get_procNameprocess pid(12883)
+I/GED     (12883): [GT]_getprocess name(com.smartphysio.smart_physio)
+I/io.smart_physi(12883): [GT] ret(1) gt_status(00000000) aniso_debug_level(0) gt_aniso_max_level(16) ani so mask(00000001) tri mask(00000002)
+I/libMEOW_gift(12883): ctx:0xb40000789ae0b5a0, ARC not Enabled.
+I/GED     (12883): [GT]_get_procNameprocess pid(12883)
+I/GED     (12883): [GT]_getprocess name(com.smartphysio.smart_physio)
+I/io.smart_physi(12883): [GT] ret(1) gt_status(00000000) aniso_debug_level(0) gt_aniso_max_level(16) ani so mask(00000001) tri mask(00000002)
+I/libMEOW_gift(12883): ctx:0xb40000789add71a8, ARC not Enabled.
+I/flutter (12883): [IMPORTANT:flutter/shell/platform/android/android_context_gl_impeller.cc(104)] Using the Impeller rendering backend (OpenGLES).
+D/libMEOW (12883): applied 1 plugins for [com.smartphysio.smart_physio]:
+D/libMEOW (12883):   plugin 1: [libMEOW_gift.so]:
+I/TextToSpeech(12883): Sucessfully bound to com.google.android.tts
+D/FlutterRenderer(12883): Width is zero. 0,0
+I/WhiteNavigationLice(12883): Modify naviBarColor to white.
+V/PhoneWindow(12883): DecorView setVisiblity: visibility = 4, Parent = android.view.ViewRootImpl@58fc69d, this = DecorView@7299712[]
+V/PhoneWindow(12883): DecorView setVisiblity: visibility = 0, Parent = android.view.ViewRootImpl@58fc69d, this = DecorView@7299712[]
+I/Choreographer(12883): Skipped 63 frames!  The application may be doing too much work on its main thread.
+D/FlutterRenderer(12883): Width is zero. 0,0
+D/FlutterRenderer(12883): Width is zero. 0,0
+D/FlutterJNI(12883): Sending viewport metrics to the engine.
+D/FlutterJNI(12883): Sending viewport metrics to the engine.
+
+======== Exception caught by widgets library =======================================================
+The following assertion was thrown building SmartPhysioApp(dirty):
+sub-route's parent navigator key must either be null or has the same navigator key as parent's key
+'package:go_router/src/route.dart':
+Failed assertion: line 481 pos 11: 'route.parentNavigatorKey == null ||
+              route.parentNavigatorKey == navigatorKey'
+
+The relevant error-causing widget was: 
+  SmartPhysioApp SmartPhysioApp:file:///Users/apple/development/github%20projects/fyp/lib/main.dart:9:14
+When the exception was thrown, this was the stack: 
+#2      ShellRouteBase._debugCheckSubRouteParentNavigatorKeys (package:go_router/src/route.dart:481:11)
+#3      new ShellRoute.<anonymous closure> (package:go_router/src/route.dart:661:22)
+#4      new ShellRoute (package:go_router/src/route.dart:664:6)
+#5      appRouter (package:smart_physio/config/routes/app_router.dart:40:5)
+#6      appRouter (package:smart_physio/config/routes/app_router.dart)
+#7      SmartPhysioApp.build (package:smart_physio/app.dart:14:21)
+#8      StatelessElement.build (package:flutter/src/widgets/framework.dart:5889:49)
+#9      ComponentElement.performRebuild (package:flutter/src/widgets/framework.dart:5817:15)
+#10     Element.rebuild (package:flutter/src/widgets/framework.dart:5529:7)
+#11     ComponentElement._firstBuild (package:flutter/src/widgets/framework.dart:5799:5)
+#12     ComponentElement.mount (package:flutter/src/widgets/framework.dart:5793:5)
+...     Normal element mounting (7 frames)
+#19     _UncontrolledProviderScopeElement.mount (package:flutter_riverpod/src/framework.dart:315:11)
+...     Normal element mounting (71 frames)
+#90     Element.inflateWidget (package:flutter/src/widgets/framework.dart:4587:20)
+#91     Element.updateChild (package:flutter/src/widgets/framework.dart:4059:18)
+#92     _RawViewElement._updateChild (package:flutter/src/widgets/view.dart:481:16)
+#93     _RawViewElement.mount (package:flutter/src/widgets/view.dart:504:5)
+...     Normal element mounting (15 frames)
+#108    Element.inflateWidget (package:flutter/src/widgets/framework.dart:4587:20)
+#109    Element.updateChild (package:flutter/src/widgets/framework.dart:4059:18)
+#110    RootElement._rebuild (package:flutter/src/widgets/binding.dart:1822:16)
+#111    RootElement.mount (package:flutter/src/widgets/binding.dart:1791:5)
+#112    RootWidget.attach.<anonymous closure> (package:flutter/src/widgets/binding.dart:1744:18)
+#113    BuildOwner.buildScope (package:flutter/src/widgets/framework.dart:3101:19)
+#114    RootWidget.attach (package:flutter/src/widgets/binding.dart:1743:13)
+#115    WidgetsBinding.attachToBuildOwner (package:flutter/src/widgets/binding.dart:1419:27)
+#116    WidgetsBinding.attachRootWidget (package:flutter/src/widgets/binding.dart:1404:5)
+#117    WidgetsBinding.scheduleAttachRootWidget.<anonymous closure> (package:flutter/src/widgets/binding.dart:1390:7)
+#121    _RawReceivePort._handleMessage (dart:isolate-patch/isolate_patch.dart:193:12)
+(elided 5 frames from class _AssertionError, class _Timer, and dart:async-patch)
+====================================================================================================
+E/ion     (12883): ioctl c0044901 failed with code -1: Invalid argument
+I/Choreographer(12883): Skipped 747 frames!  The application may be doing too much work on its main thread.
+I/TextToSpeech(12883): Connected to ComponentInfo{com.google.android.tts/com.google.android.apps.speech.tts.googletts.service.GoogleTtsService}
+D/ProfileInstaller(12883): Installing profile for com.smartphysio.smart_physio
+I/TextToSpeech(12883): Set up connection to ComponentInfo{com.google.android.tts/com.google.android.apps.speech.tts.googletts.service.GoogleTtsService}

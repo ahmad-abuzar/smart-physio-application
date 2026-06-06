@@ -1,0 +1,68 @@
+{
+  "project_info": {
+    "project_number": "646780424862",
+    "project_id": "smart-physico",
+    "storage_bucket": "smart-physico.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:646780424862:android:98dd9673725d1ab8bc618f",
+        "android_client_info": {
+          "package_name": "com.example.smart_physio"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "646780424862-r0bsovocohu1g4g50qe8qgts4kru262k.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDjAikQTrsFt1vpnrWAL_ugTCyXLFGKTz0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "646780424862-r0bsovocohu1g4g50qe8qgts4kru262k.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:646780424862:android:ea542488a9015b9abc618f",
+        "android_client_info": {
+          "package_name": "com.smartphysio.smart_physio"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "646780424862-r0bsovocohu1g4g50qe8qgts4kru262k.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDjAikQTrsFt1vpnrWAL_ugTCyXLFGKTz0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "646780424862-r0bsovocohu1g4g50qe8qgts4kru262k.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

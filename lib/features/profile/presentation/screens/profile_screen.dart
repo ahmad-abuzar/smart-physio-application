@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+
 import '../../../../core/constants/app_colors.dart';
+import '../../../../core/theme/theme_provider.dart';
 import '../../../auth/presentation/providers/auth_provider.dart';
 
 class ProfileScreen extends ConsumerWidget {
@@ -11,16 +13,16 @@ class ProfileScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final authState = ref.watch(authProvider);
     final user = authState.user;
+    final themeMode = ref.watch(themeModeProvider);
+    final isDarkMode = themeMode == ThemeMode.dark;
+    final colorScheme = Theme.of(context).colorScheme;
 
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Profile'),
-      ),
+      appBar: AppBar(title: const Text('Profile')),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(20),
         child: Column(
           children: [
-            // Avatar
             CircleAvatar(
               radius: 50,
               backgroundColor: AppColors.primary.withValues(alpha: 0.1),
@@ -36,22 +38,20 @@ class ProfileScreen extends ConsumerWidget {
             const SizedBox(height: 12),
             Text(
               user?.name ?? 'User',
-              style: const TextStyle(
+              style: TextStyle(
                 fontSize: 22,
                 fontWeight: FontWeight.bold,
-                color: AppColors.textPrimary,
+                color: colorScheme.onSurface,
               ),
             ),
             Text(
               user?.email ?? '',
-              style: const TextStyle(
+              style: TextStyle(
                 fontSize: 14,
-                color: AppColors.textSecondary,
+                color: colorScheme.onSurfaceVariant,
               ),
             ),
             const SizedBox(height: 24),
-
-            // Info cards
             _InfoTile(
               icon: Icons.person_outline,
               title: 'Full Name',
@@ -80,8 +80,6 @@ class ProfileScreen extends ConsumerWidget {
             const SizedBox(height: 16),
             const Divider(),
             const SizedBox(height: 8),
-
-            // Settings options
             _SettingsTile(
               icon: Icons.notifications_outlined,
               title: 'Notifications',
@@ -91,11 +89,15 @@ class ProfileScreen extends ConsumerWidget {
               icon: Icons.dark_mode_outlined,
               title: 'Dark Mode',
               trailing: Switch(
-                value: false,
-                onChanged: (val) {},
+                value: isDarkMode,
+                onChanged: (val) {
+                  ref.read(themeModeProvider.notifier).setDarkMode(val);
+                },
                 activeThumbColor: AppColors.primary,
               ),
-              onTap: () {},
+              onTap: () {
+                ref.read(themeModeProvider.notifier).toggleThemeMode();
+              },
             ),
             _SettingsTile(
               icon: Icons.record_voice_over_outlined,
@@ -121,14 +123,14 @@ class ProfileScreen extends ConsumerWidget {
               },
             ),
             const SizedBox(height: 16),
-
-            // Logout
             SizedBox(
               width: double.infinity,
               child: OutlinedButton.icon(
                 onPressed: () async {
                   await ref.read(authProvider.notifier).logout();
-                  if (context.mounted) context.go('/login');
+                  if (context.mounted) {
+                    context.go('/login');
+                  }
                 },
                 icon: const Icon(Icons.logout, color: AppColors.error),
                 label: const Text(
@@ -161,6 +163,8 @@ class _InfoTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8),
       child: Row(
@@ -181,17 +185,17 @@ class _InfoTile extends StatelessWidget {
               children: [
                 Text(
                   title,
-                  style: const TextStyle(
+                  style: TextStyle(
                     fontSize: 12,
-                    color: AppColors.textHint,
+                    color: colorScheme.onSurfaceVariant,
                   ),
                 ),
                 Text(
                   value,
-                  style: const TextStyle(
+                  style: TextStyle(
                     fontSize: 15,
                     fontWeight: FontWeight.w500,
-                    color: AppColors.textPrimary,
+                    color: colorScheme.onSurface,
                   ),
                 ),
               ],
@@ -218,10 +222,14 @@ class _SettingsTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+
     return ListTile(
-      leading: Icon(icon, color: AppColors.textSecondary),
+      leading: Icon(icon, color: colorScheme.onSurfaceVariant),
       title: Text(title),
-      trailing: trailing ?? const Icon(Icons.chevron_right, color: AppColors.textHint),
+      trailing:
+          trailing ??
+          Icon(Icons.chevron_right, color: colorScheme.onSurfaceVariant),
       onTap: onTap,
       contentPadding: EdgeInsets.zero,
     );

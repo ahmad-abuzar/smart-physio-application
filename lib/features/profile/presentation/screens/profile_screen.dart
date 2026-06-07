@@ -62,11 +62,11 @@ class ProfileScreen extends ConsumerWidget {
               title: 'Email',
               value: user?.email ?? '-',
             ),
-            _InfoTile(
-              icon: Icons.cake_outlined,
-              title: 'Age',
-              value: '${user?.age ?? "-"} years',
-            ),
+            // _InfoTile(
+            //   icon: Icons.cake_outlined,
+            //   title: 'Age',
+            //   value: '${user?.age ?? "-"} years',
+            // ),
             _InfoTile(
               icon: Icons.wc_outlined,
               title: 'Gender',
@@ -80,11 +80,11 @@ class ProfileScreen extends ConsumerWidget {
             const SizedBox(height: 16),
             const Divider(),
             const SizedBox(height: 8),
-            _SettingsTile(
-              icon: Icons.notifications_outlined,
-              title: 'Notifications',
-              onTap: () {},
-            ),
+            // _SettingsTile(
+            //   icon: Icons.notifications_outlined,
+            //   title: 'Notifications',
+            //   onTap: () {},
+            // ),
             _SettingsTile(
               icon: Icons.dark_mode_outlined,
               title: 'Dark Mode',
@@ -99,16 +99,16 @@ class ProfileScreen extends ConsumerWidget {
                 ref.read(themeModeProvider.notifier).toggleThemeMode();
               },
             ),
-            _SettingsTile(
-              icon: Icons.record_voice_over_outlined,
-              title: 'Voice Feedback',
-              trailing: Switch(
-                value: true,
-                onChanged: (val) {},
-                activeThumbColor: AppColors.primary,
-              ),
-              onTap: () {},
-            ),
+            // _SettingsTile(
+            //   icon: Icons.record_voice_over_outlined,
+            //   title: 'Voice Feedback',
+            //   trailing: Switch(
+            //     value: true,
+            //     onChanged: (val) {},
+            //     activeThumbColor: AppColors.primary,
+            //   ),
+            //   onTap: () {},
+            // ),
             _SettingsTile(
               icon: Icons.info_outline,
               title: 'About Smart Physio',

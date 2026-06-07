@@ -110,6 +110,52 @@ class AppTheme {
         onError: Colors.white,
       ),
       appBarTheme: const AppBarTheme(
+ dev_dependencies:
+   flutter_test:
+     sdk: flutter
+   # Add this package
+   flutter_launcher_icons: ^0.13.1
+ 
+ # Add this configuration block at the end of pubspec.yaml
+ flutter_launcher_icons:
+   android: "launcher_icon"
+   ios: true
+   image_path: "assets/icons/app_logo.png"
+   min_sdk_android: 21 # Required if your min_sdk is 21+
+   web:
+     generate: true
+     image_path: "assets/icons/app_logo.png"
+     background_color: "#hexcode"
+     theme_color: "#hexcode"
+   windows:
+     generate: true
+     image_path: "assets/icons/app_logo.png"
+   macos:
+     generate: true
+     image_path: "assets/icons/app_logo.png"
+ dev_dependencies:
+   flutter_test:
+     sdk: flutter
+   # Add this package
+   flutter_launcher_icons: ^0.13.1
+ 
+ # Add this configuration block at the end of pubspec.yaml
+ flutter_launcher_icons:
+   android: "launcher_icon"
+   ios: true
+   image_path: "assets/icons/app_logo.png"
+   min_sdk_android: 21 # Required if your min_sdk is 21+
+   web:
+     generate: true
+     image_path: "assets/icons/app_logo.png"
+     background_color: "#hexcode"
+     theme_color: "#hexcode"
+   windows:
+     generate: true
+     image_path: "assets/icons/app_logo.png"
+   macos:
+     generate: true
+     image_path: "assets/icons/app_logo.png"
         backgroundColor: Color(0xFF1E293B),
         foregroundColor: Color(0xFFE2E8F0),
         elevation: 0,

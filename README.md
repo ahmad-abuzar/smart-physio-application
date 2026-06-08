@@ -16,10 +16,10 @@ Smart Physio is an AI-powered muscle pain relief and exercise recommendation sys
 Here is a glimpse of the Smart Physio app in action:
 
 <p align="center">
-  <img src="assets/screenshots/splash_screen.png" width="220" alt="Welcome Page">
-  <img src="assets/screenshots/home.png" width="220" alt="Home Screen">
-  <img src="assets/screenshots/assessment.png" width="220" alt="Pain Assessment">
-  <img src="assets/screenshots/session.png" width="220" alt="Live Pose Detection">
+  <img src="assets/screenshots/splash_screen.jpg" width="220" alt="Welcome Page">
+  <img src="assets/screenshots/home.jpg" width="220" alt="Home Screen">
+  <img src="assets/screenshots/assessment.jpg" width="220" alt="Pain Assessment">
+  <img src="assets/screenshots/session.jpg" width="220" alt="Live Pose Detection">
 </p>
 
 ## Requirements

@@ -11,6 +11,17 @@ Smart Physio is an AI-powered muscle pain relief and exercise recommendation sys
 - **Voice Guidance**: Text-to-speech integration for hands-free exercise instructions and posture corrections.
 - **Personalized Profiles**: Manage health conditions, exercise preferences, and track your individual recovery journey.
 
+## Screenshots
+
+Here is a glimpse of the Smart Physio app in action:
+
+<p align="center">
+  <img src="assets/screenshots/splash_screen.png" width="220" alt="Welcome Page">
+  <img src="assets/screenshots/home.png" width="220" alt="Home Screen">
+  <img src="assets/screenshots/assessment.png" width="220" alt="Pain Assessment">
+  <img src="assets/screenshots/session.png" width="220" alt="Live Pose Detection">
+</p>
+
 ## Requirements
 
 - Flutter SDK (3.x)

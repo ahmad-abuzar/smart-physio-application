@@ -14,7 +14,15 @@ import '../../../exercise_recommendation/data/datasources/exercise_local_data.da
 import '../../../exercise_recommendation/domain/entities/exercise_entity.dart';
 
 enum _MotionType { rep, hold }
-enum _JointGroup { shoulderArm, elbow, hipKnee, kneeAnkle, hipFlexion, shoulderShrug }
+
+enum _JointGroup {
+  shoulderArm,
+  elbow,
+  hipKnee,
+  kneeAnkle,
+  hipFlexion,
+  shoulderShrug,
+}
 
 class _ExerciseConfig {
   final _MotionType type;
@@ -499,9 +507,7 @@ class _ExerciseSessionScreenState extends ConsumerState<ExerciseSessionScreen> {
       await _cameraController!.initialize();
 
       _poseDetector = PoseDetector(
-        options: PoseDetectorOptions(
-          mode: PoseDetectionMode.stream,
-        ),
+        options: PoseDetectorOptions(mode: PoseDetectionMode.stream),
       );
 
       if (mounted) {
@@ -526,11 +532,15 @@ class _ExerciseSessionScreenState extends ConsumerState<ExerciseSessionScreen> {
     });
 
     _startPoseDetection();
-    _speak('Starting ${_exercise?.name ?? "exercise"}. Position yourself in the frame.');
+    _speak(
+      'Starting ${_exercise?.name ?? "exercise"}. Position yourself in the frame.',
+    );
   }
 
   void _startPoseDetection() {
-    if (_cameraController == null || !_cameraController!.value.isInitialized) return;
+    if (_cameraController == null || !_cameraController!.value.isInitialized) {
+      return;
+    }
 
     _cameraController!.startImageStream((image) {
       if (_isDetecting || _isPaused) return;
@@ -718,7 +728,8 @@ class _ExerciseSessionScreenState extends ConsumerState<ExerciseSessionScreen> {
     final b = landmarks[trio[1]];
     final c = landmarks[trio[2]];
 
-    final visible = a != null &&
+    final visible =
+        a != null &&
         b != null &&
         c != null &&
         a.likelihood >= minLikelihood &&
@@ -750,11 +761,14 @@ class _ExerciseSessionScreenState extends ConsumerState<ExerciseSessionScreen> {
   }
 
   void _handleRepMotion(double angle, _ExerciseConfig config) {
-    final inRange = angle >= (config.lowAngle - 15) &&
-        angle <= (config.highAngle + 15);
+    final inRange =
+        angle >= (config.lowAngle - 15) && angle <= (config.highAngle + 15);
 
     if (inRange) _totalCorrectFrames++;
-    final score = (_totalCorrectFrames / max(1, _totalFrames) * 100).clamp(0.0, 100.0);
+    final score = (_totalCorrectFrames / max(1, _totalFrames) * 100).clamp(
+      0.0,
+      100.0,
+    );
 
     final prevPhase = _repPhase;
     if (_repPhase == 'low' && angle >= config.highAngle) {
@@ -785,8 +799,7 @@ class _ExerciseSessionScreenState extends ConsumerState<ExerciseSessionScreen> {
   }
 
   void _handleHoldMotion(double angle, _ExerciseConfig config) {
-    final inHoldRange =
-        angle >= config.lowAngle && angle <= config.highAngle;
+    final inHoldRange = angle >= config.lowAngle && angle <= config.highAngle;
 
     if (inHoldRange) {
       _totalCorrectFrames++;
@@ -803,14 +816,18 @@ class _ExerciseSessionScreenState extends ConsumerState<ExerciseSessionScreen> {
       _holdProgress = 0.0;
     }
 
-    final score = (_totalCorrectFrames / max(1, _totalFrames) * 100).clamp(0.0, 100.0);
+    final score = (_totalCorrectFrames / max(1, _totalFrames) * 100).clamp(
+      0.0,
+      100.0,
+    );
 
     if (mounted) {
       setState(() {
         _formScore = score;
         if (inHoldRange) {
           final secsLeft =
-              (config.holdSeconds - (config.holdSeconds * _holdProgress)).ceil();
+              (config.holdSeconds - (config.holdSeconds * _holdProgress))
+                  .ceil();
           _feedbackMessage = 'Hold — $secsLeft s left';
           _feedbackColor = AppColors.poseCorrect;
         } else {
@@ -913,9 +930,16 @@ class _ExerciseSessionScreenState extends ConsumerState<ExerciseSessionScreen> {
           mainAxisSize: MainAxisSize.min,
           children: [
             _ResultRow(label: 'Exercise', value: _exercise?.name ?? ''),
-            _ResultRow(label: 'Total Reps', value: '${(_exercise?.repetitions ?? 0) * (_exercise?.sets ?? 0)}'),
+            _ResultRow(
+              label: 'Total Reps',
+              value:
+                  '${(_exercise?.repetitions ?? 0) * (_exercise?.sets ?? 0)}',
+            ),
             _ResultRow(label: 'Sets Completed', value: '$_currentSet'),
-            _ResultRow(label: 'Form Score', value: '${_formScore.toStringAsFixed(0)}%'),
+            _ResultRow(
+              label: 'Form Score',
+              value: '${_formScore.toStringAsFixed(0)}%',
+            ),
             _ResultRow(label: 'Duration', value: _formatTime(_elapsedSeconds)),
           ],
         ),
@@ -990,7 +1014,8 @@ class _ExerciseSessionScreenState extends ConsumerState<ExerciseSessionScreen> {
                     _cameraController!.value.previewSize?.width ?? 1,
                   ),
                   screenSize: MediaQuery.of(context).size,
-                  mirror: _cameraController!.description.lensDirection ==
+                  mirror:
+                      _cameraController!.description.lensDirection ==
                       CameraLensDirection.front,
                 ),
               ),
@@ -1073,7 +1098,10 @@ class _ExerciseSessionScreenState extends ConsumerState<ExerciseSessionScreen> {
                     const SizedBox(height: 4),
                     Text(
                       'Set: $_currentSet/${_exercise!.sets}',
-                      style: const TextStyle(color: Colors.white70, fontSize: 13),
+                      style: const TextStyle(
+                        color: Colors.white70,
+                        fontSize: 13,
+                      ),
                     ),
                     if (_config?.type == _MotionType.hold) ...[
                       const SizedBox(height: 6),
@@ -1086,7 +1114,8 @@ class _ExerciseSessionScreenState extends ConsumerState<ExerciseSessionScreen> {
                             minHeight: 6,
                             backgroundColor: Colors.white24,
                             valueColor: const AlwaysStoppedAnimation(
-                                AppColors.poseCorrect),
+                              AppColors.poseCorrect,
+                            ),
                           ),
                         ),
                       ),
@@ -1138,7 +1167,9 @@ class _ExerciseSessionScreenState extends ConsumerState<ExerciseSessionScreen> {
                     Container(
                       width: double.infinity,
                       padding: const EdgeInsets.symmetric(
-                          horizontal: 16, vertical: 10),
+                        horizontal: 16,
+                        vertical: 10,
+                      ),
                       decoration: BoxDecoration(
                         color: _feedbackColor.withValues(alpha: 0.2),
                         borderRadius: BorderRadius.circular(10),
@@ -1230,18 +1261,90 @@ class _PoseOverlayPainter extends CustomPainter {
 
     for (final pose in poses) {
       // Draw connections
-      _drawLine(canvas, pose, PoseLandmarkType.leftShoulder, PoseLandmarkType.leftElbow, paint);
-      _drawLine(canvas, pose, PoseLandmarkType.leftElbow, PoseLandmarkType.leftWrist, paint);
-      _drawLine(canvas, pose, PoseLandmarkType.rightShoulder, PoseLandmarkType.rightElbow, paint);
-      _drawLine(canvas, pose, PoseLandmarkType.rightElbow, PoseLandmarkType.rightWrist, paint);
-      _drawLine(canvas, pose, PoseLandmarkType.leftShoulder, PoseLandmarkType.rightShoulder, paint);
-      _drawLine(canvas, pose, PoseLandmarkType.leftShoulder, PoseLandmarkType.leftHip, paint);
-      _drawLine(canvas, pose, PoseLandmarkType.rightShoulder, PoseLandmarkType.rightHip, paint);
-      _drawLine(canvas, pose, PoseLandmarkType.leftHip, PoseLandmarkType.rightHip, paint);
-      _drawLine(canvas, pose, PoseLandmarkType.leftHip, PoseLandmarkType.leftKnee, paint);
-      _drawLine(canvas, pose, PoseLandmarkType.leftKnee, PoseLandmarkType.leftAnkle, paint);
-      _drawLine(canvas, pose, PoseLandmarkType.rightHip, PoseLandmarkType.rightKnee, paint);
-      _drawLine(canvas, pose, PoseLandmarkType.rightKnee, PoseLandmarkType.rightAnkle, paint);
+      _drawLine(
+        canvas,
+        pose,
+        PoseLandmarkType.leftShoulder,
+        PoseLandmarkType.leftElbow,
+        paint,
+      );
+      _drawLine(
+        canvas,
+        pose,
+        PoseLandmarkType.leftElbow,
+        PoseLandmarkType.leftWrist,
+        paint,
+      );
+      _drawLine(
+        canvas,
+        pose,
+        PoseLandmarkType.rightShoulder,
+        PoseLandmarkType.rightElbow,
+        paint,
+      );
+      _drawLine(
+        canvas,
+        pose,
+        PoseLandmarkType.rightElbow,
+        PoseLandmarkType.rightWrist,
+        paint,
+      );
+      _drawLine(
+        canvas,
+        pose,
+        PoseLandmarkType.leftShoulder,
+        PoseLandmarkType.rightShoulder,
+        paint,
+      );
+      _drawLine(
+        canvas,
+        pose,
+        PoseLandmarkType.leftShoulder,
+        PoseLandmarkType.leftHip,
+        paint,
+      );
+      _drawLine(
+        canvas,
+        pose,
+        PoseLandmarkType.rightShoulder,
+        PoseLandmarkType.rightHip,
+        paint,
+      );
+      _drawLine(
+        canvas,
+        pose,
+        PoseLandmarkType.leftHip,
+        PoseLandmarkType.rightHip,
+        paint,
+      );
+      _drawLine(
+        canvas,
+        pose,
+        PoseLandmarkType.leftHip,
+        PoseLandmarkType.leftKnee,
+        paint,
+      );
+      _drawLine(
+        canvas,
+        pose,
+        PoseLandmarkType.leftKnee,
+        PoseLandmarkType.leftAnkle,
+        paint,
+      );
+      _drawLine(
+        canvas,
+        pose,
+        PoseLandmarkType.rightHip,
+        PoseLandmarkType.rightKnee,
+        paint,
+      );
+      _drawLine(
+        canvas,
+        pose,
+        PoseLandmarkType.rightKnee,
+        PoseLandmarkType.rightAnkle,
+        paint,
+      );
 
       // Draw dots
       for (final landmark in pose.landmarks.values) {
@@ -1251,8 +1354,13 @@ class _PoseOverlayPainter extends CustomPainter {
     }
   }
 
-  void _drawLine(Canvas canvas, Pose pose, PoseLandmarkType type1,
-      PoseLandmarkType type2, Paint paint) {
+  void _drawLine(
+    Canvas canvas,
+    Pose pose,
+    PoseLandmarkType type1,
+    PoseLandmarkType type2,
+    Paint paint,
+  ) {
     final lm1 = pose.landmarks[type1];
     final lm2 = pose.landmarks[type2];
     if (lm1 != null && lm2 != null) {
@@ -1305,10 +1413,7 @@ class _ControlButton extends StatelessWidget {
           const SizedBox(height: 4),
           Text(
             label,
-            style: TextStyle(
-              color: color ?? Colors.white70,
-              fontSize: 11,
-            ),
+            style: TextStyle(color: color ?? Colors.white70, fontSize: 11),
           ),
         ],
       ),
@@ -1330,10 +1435,7 @@ class _ResultRow extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Text(label, style: const TextStyle(color: AppColors.textSecondary)),
-          Text(
-            value,
-            style: const TextStyle(fontWeight: FontWeight.w600),
-          ),
+          Text(value, style: const TextStyle(fontWeight: FontWeight.w600)),
         ],
       ),
     );
